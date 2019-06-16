@@ -19,34 +19,25 @@
     var words = ["madonna", "seventies", "random", "jackson", "problem"];
     var chances = 10;
     var j = 0;
-    var u = 0;
-    
+    var wArrayString = "";
+    var aArrayString = "";
 
 
     // Functions  
 
-    var checkWin = function (boolean) {
-      if (boolean) {
+
+
+    var checkWin = function (string1, string2) {
+      if (string1 === string2) {
         console.log("you won!");
+        reset();
       }
-      else if (wordArray.includes(userPressed) === false) {
-        chances--;
-        console.log("Chances: " + chances);
+      else if (chances === 0) {
+        reset();
       }
     }
 
-    var compareArray = function (arr1, arr2) {
-      for (i = 0; i < wordArray.length; i++) {
-        if (arr1.length !== arr2.length)
-          return false;
-        for (var i = arr1.length; i--;) {
-          if (arr1[i] !== arr2[i])
-            return false;
-        }
-        return true;
-      }
-    }
-   
+
     var guessed = function (rand) {
       for (i = 0; i < rand.length; i++) {
         if (userPressed === wordArray[i]) {
@@ -62,25 +53,33 @@
     };
 
     var wordToArray = function (string) {
+      wordArray = [];
       for (i = 0; i < string.length; i++) {
         wordArray[i] = string.charAt(i);
       }
     };
 
     function wordChecker(word) {
+      update();
       if (wordsUsed.includes(word) || answer.includes(word)) {
         console.log("you already tried this word")
+        checkWin(wArrayString, aArrayString);
       }
       else {
         if (wordArray.includes(word) && answer.includes(word) === false) {
-          console.log("You guessed a word")
-          checkWin(compareArray(wordArray, answer));
+          update();
+          console.log("You guessed a word");
+          checkWin(wArrayString, aArrayString);
         }
         else if (wordsUsed.includes(word) === false) {
-          console.log("try again");
+          console.log("Try again");
           wordsUsed[j] = userPressed;
-          j++
-          checkWin(compareArray(wordArray, answer));
+          j++;
+          chances--;
+          console.log("Chances: " + chances);
+          if (chances === 0) {
+            checkWin(wArrayString, aArrayString);
+          }
         }
       }
     }
@@ -89,40 +88,46 @@
       var rand = words[Math.floor(Math.random() * words.length)];
       wordToArray(rand);
       setSpaces(rand);
+      wArrayString = wordArray.join("");
+      aArrayString = answer.join("");
       console.log(answer);
-      if(compareArray(wordArray, answer)){
-        checkWin(compareArray(wordArray, answer));
-      }
     }
-
-    game();
 
     function reset() {
-      if (chances === 0 || u != 0) {
-        wordsUsed = [];
-        if(chances === 0){console.log("you lost")}
-        game();
-        chances = 10;
-        j = 0;  
-      }
+      answer = [];
+      wordsUsed = [];
+      chances = 10;
+      j = 0;
+      wArrayString = "";
+      aArrayString = "";
+      update();
+      game();
     }
+
 
     document.onkeydown = function (event) {
       userPressed = event.key;
+      update();
     }
 
     document.onkeyup = function (event) {
       wordChecker(userPressed);
       guessed(wordArray);
       console.log(answer);
-      if(compareArray(wordArray, answer)){
-        checkWin(compareArray(wordArray, answer));
-        u++;
-        reset();
-      }
+      update();
+      checkWin(wArrayString, aArrayString);
     }
 
-//  Texts
+    function update() {
+      aArrayString = "";
+      wArrayString = "";
+      wArrayString = wordArray.join("");
+      aArrayString = answer.join("");
+    }
+
+    game();
+
+
 
 
 
