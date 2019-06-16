@@ -1,0 +1,11 @@
+#game h1 {
+    text-align: center;
+    padding: 20px;
+}
+
+#finalmessage {
+    text-align: center;
+    padding-top: 30px;
+    font-weight: bold;
+    font-size: 30px;
+}
