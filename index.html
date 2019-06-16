@@ -11,9 +11,11 @@
 </head>
 
 <body>
+  
   <div id="game">
     <h1>Time to play some hangman!</h1>
   </div>
+
   <div class="container">
     <div class="row">
       <div class="col-8">
@@ -46,8 +48,6 @@
 
   </div>
 
-
-
   <script>
 
     // Variables for DOM manipulation
@@ -60,7 +60,7 @@
     let message = document.getElementById("finalmessage");
     let chancesSpan = document.getElementById("chancescount");
 
-    //OBJ
+    // OBJ
 
     var gameObject = {
       userPressed: "",
@@ -157,7 +157,6 @@
         this.aArrayString = this.answer.join("");
         answerSpan.innerHTML = this.answer.join(" , ");
       }
-
     };
 
     // Key Functions 
@@ -180,5 +179,4 @@
   </script>
 
 </body>
-
 </html>
