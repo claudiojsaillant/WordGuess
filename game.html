@@ -7,10 +7,38 @@
 </head>
 
 <body>
+  <div id="game">
+    <h1>Try to guess the word!</h1>
+  </div>
+
+  <div id="used">
+    <p>Number of used words: <span id="wordsused"></span></p>
+  </div>
+
+  <div id="gameSpaces">
+    <p>Your Guesses so far: <span id="answer"></span> </p>
+  </div>
+
+  <div id="message">
+    <p id="finalmessage">Make your guess user!</p>
+  </div>
+
+  <div class="score-board">
+    <div id="wins">Games won:<span id="wincount">0</span></div>
+    <div id="losses">Games lost:<span id="lostcount">0</span></div>
+  </div>
+
+
 
   <script>
 
     // Variables
+
+    let gamesWon = document.getElementById("wincount");
+    let gamesLost = document.getElementById("lostcount");
+    let result = document.getElementById("finalmessage");
+    let wordsUsedSpan = document.getElementById("wordsused");
+    let answerSpan = document.getElementById("answer");
 
     var userPressed;
     var wordsUsed = [];
@@ -21,6 +49,8 @@
     var j = 0;
     var wArrayString = "";
     var aArrayString = "";
+    var wins = 0;
+    var losses = 0;
 
 
     // Functions  
@@ -30,9 +60,13 @@
     var checkWin = function (string1, string2) {
       if (string1 === string2) {
         console.log("you won!");
+        wins++
+        gamesWon.innerHTML = wins;
         reset();
       }
       else if (chances === 0) {
+        losses ++;
+        gamesLost.innerHTML = losses;
         reset();
       }
     }
@@ -76,6 +110,7 @@
           wordsUsed[j] = userPressed;
           j++;
           chances--;
+          wordsUsedSpan.innerHTML = wordsUsed.join(", ");
           console.log("Chances: " + chances);
           if (chances === 0) {
             checkWin(wArrayString, aArrayString);
@@ -91,6 +126,7 @@
       wArrayString = wordArray.join("");
       aArrayString = answer.join("");
       console.log(answer);
+      answerSpan.innerHTML = answer.join(", ");
     }
 
     function reset() {
@@ -113,7 +149,7 @@
     document.onkeyup = function (event) {
       wordChecker(userPressed);
       guessed(wordArray);
-      console.log(answer);
+      answerSpan.innerHTML = answer.join(", ");
       update();
       checkWin(wArrayString, aArrayString);
     }
@@ -126,11 +162,6 @@
     }
 
     game();
-
-
-
-
-
 
   </script>
 
