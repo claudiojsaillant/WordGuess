@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My First Object</title>
-  <link rel="stylesheet" type="text/css" href="reset.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 
@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="col-sm-3">
-        <img src="hangman.png" alt="" id="image">
+        <img src="assets/images/hangman.png" alt="" id="image">
       </div>
     </div>
   </div>
@@ -76,16 +76,16 @@
     let chancesSpan = document.getElementById("chancescount");
     let image = document.getElementById("image");
     let audioLose = document.createElement("audio");
-    audioLose.setAttribute("src", "lose.mp3");
+    audioLose.setAttribute("src", "assets/sounds/lose.mp3");
     let audioWin = document.createElement("audio");
-    audioWin.setAttribute("src", "win.mp3");
+    audioWin.setAttribute("src", "assets/sounds/win.mp3");
 
     // Variables I wanted to leave outside
     var randomNumber;
 
     // Game Object
     var gameObject = {
-      imgName: ["madonna.jpg", "seventies.jpg", "random.jpg", "ayuwoki.jpg", "problem.png"],
+      imgName: ["assets/images/madonna.jpg", "assets/images/seventies.jpg", "assets/images/random.jpg", "assets/images/ayuwoki.jpg", "assets/images/problem.png"],
       userPressed: "",
       canUse: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
       words: ["madonna", "seventies", "random", "jackson", "problem"],
