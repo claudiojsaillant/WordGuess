@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  
+
   <div id="game">
     <h1>Time to play some hangman!</h1>
   </div>
@@ -50,6 +50,16 @@
 
   <script>
 
+    // Gets Link for Theme Song
+
+    function sound() {
+      var audioElement = document.createElement("audio");
+      audioElement.setAttribute("src", "lose.mp3");
+      audioElement.play();
+    }
+
+
+
     // Variables for DOM manipulation
 
     let gamesWon = document.getElementById("wincount");
@@ -59,11 +69,15 @@
     let answerSpan = document.getElementById("answer");
     let message = document.getElementById("finalmessage");
     let chancesSpan = document.getElementById("chancescount");
-
+    let audioLose = document.createElement("audio");
+    audioLose.setAttribute("src", "lose.mp3");
+    let audioWin = document.createElement("audio");
+    audioWin.setAttribute("src", "win.mp3");
     // OBJ
 
     var gameObject = {
       userPressed: "",
+      canUse: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
       words: ["madonna", "seventies", "random", "jackson", "problem"],
       wordsUsed: [],
       answer: [],
@@ -76,12 +90,14 @@
       aArrayString: "",
       checkWin: function (string1, string2) {
         if (string1 === string2) {
+          audioWin.play();
           message.innerHTML = "You won!";
           this.wins++
           gamesWon.innerHTML = this.wins;
           this.reset();
         }
         else if (this.chances === 0) {
+          audioLose.play();
           message.innerHTML = "You lost!";
           this.losses++;
           gamesLost.innerHTML = this.losses;
@@ -111,6 +127,9 @@
         if (this.wordsUsed.includes(word) || this.answer.includes(word)) {
           message.innerHTML = "You already tried this word!";
           this.checkWin(this.wArrayString, this.aArrayString);
+        }
+        else if (this.canUse.includes(word) === false) {
+          message.innerHTML = "You can only use words!";
         }
         else {
           if (this.wordArray.includes(word) && this.answer.includes(word) === false) {
@@ -179,4 +198,5 @@
   </script>
 
 </body>
+
 </html>
