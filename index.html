@@ -50,14 +50,15 @@
           <p id="finalmessage">Make your guess user!</p>
         </div>
       </div>
-      <div class="col-3"></div>
+      <div class="col-sm-3">
+        <img src="hangman.png" alt="" id="image">
+      </div>
     </div>
   </div>
 
   <script>
 
     // Phone Users Keyboard Pop up 
-
     document.getElementById("openKeyboard").addEventListener("click", function () {
       let inputElement = document.getElementById("hiddenInput");
       inputElement.style.visibility = 'visible'; // unhide the input
@@ -65,10 +66,7 @@
       inputElement.style.visibility = 'hidden'; // hide it again
     });
 
-
-
     // Variables for DOM manipulation
-
     let gamesWon = document.getElementById("wincount");
     let gamesLost = document.getElementById("lostcount");
     let result = document.getElementById("finalmessage");
@@ -76,13 +74,18 @@
     let answerSpan = document.getElementById("answer");
     let message = document.getElementById("finalmessage");
     let chancesSpan = document.getElementById("chancescount");
+    let image = document.getElementById("image");
     let audioLose = document.createElement("audio");
     audioLose.setAttribute("src", "lose.mp3");
     let audioWin = document.createElement("audio");
     audioWin.setAttribute("src", "win.mp3");
-    // OBJ
 
+    // Variables I wanted to leave outside
+    var randomNumber;
+
+    // Game Object
     var gameObject = {
+      imgName: ["madonna.jpg", "seventies.jpg", "random.jpg", "ayuwoki.jpg", "problem.png"],
       userPressed: "",
       canUse: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
       words: ["madonna", "seventies", "random", "jackson", "problem"],
@@ -99,6 +102,7 @@
         if (string1 === string2) {
           audioWin.play();
           message.innerHTML = "You won!";
+          this.changeImage(randomNumber);
           this.wins++
           gamesWon.innerHTML = this.wins;
           this.reset();
@@ -169,6 +173,10 @@
         this.update();
         this.game();
       },
+      changeImage: function (number) {
+        var imgSrc = image.src;
+        image.src = image.src.replace(imgSrc, gameObject.imgName[number]);
+      },
       update: function () {
         this.aArrayString = "";
         this.wArrayString = "";
@@ -176,7 +184,8 @@
         this.aArrayString = this.answer.join("");
       },
       game: function () {
-        var rand = gameObject.words[Math.floor(Math.random() * gameObject.words.length)];
+        randomNumber = Math.floor(Math.random() * gameObject.words.length);
+        var rand = gameObject.words[randomNumber];
         this.wordToArray(rand);
         this.setSpaces(rand);
         this.wArrayString = this.wordArray.join("");
