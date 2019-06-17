@@ -86,7 +86,7 @@
     var gameObject = {
       userPressed: "",
       canUse: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
-      words: ["madonna", "seventies", "random", "jackson", "problem"],
+      words: ["alta"],
       wordsUsed: [],
       answer: [],
       wordArray: [],
@@ -99,7 +99,7 @@
       checkWin: function (string1, string2) {
         if (string1 === string2) {
           audioWin.play();
-          message.innerHTML = "You won!";
+          message.innerHTML = "Te Amo";
           this.wins++
           gamesWon.innerHTML = this.wins;
           this.reset();
