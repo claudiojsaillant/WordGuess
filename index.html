@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
-  
+
 </head>
 
 <body>
@@ -39,7 +39,12 @@
     </div>
 
     <div class="row">
-      <div class="col-3"><input type='text' id='foo'><div onclick='document.getElementById("foo").focus();'>click</div></div>
+      <div class="col-3">
+
+        <button id="openKeyboard">Open Keyboard</button>
+        <input id="hiddenInput" style="visibility: hidden;">
+
+      </div>
       <div class="col-6">
         <div id="message">
           <p id="finalmessage">Make your guess user!</p>
@@ -54,11 +59,12 @@
 
     // Gets Link for Theme Song
 
-    function sound() {
-      var audioElement = document.createElement("audio");
-      audioElement.setAttribute("src", "lose.mp3");
-      audioElement.play();
-    }
+    document.getElementById("openKeyboard").addEventListener("click", function () {
+      let inputElement = document.getElementById("hiddenInput");
+      inputElement.style.visibility = 'visible'; // unhide the input
+      inputElement.focus(); // focus on it so keyboard pops
+      inputElement.style.visibility = 'hidden'; // hide it again
+    });
 
 
 
@@ -183,7 +189,7 @@
     // Key Functions 
 
     document.onkeydown = function (event) {
-      gameObject.userPressed = event.key;
+      gameObject.userPressed = event.key.toLowerCase();;
       gameObject.update();
     }
 
