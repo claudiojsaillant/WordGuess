@@ -40,8 +40,8 @@
 
     <div class="row">
       <div class="col-3">
-
-        <button id="openKeyboard">Open Keyboard</button>
+        <p>Click here if you are a phone user!</p>
+        <button id="openKeyboard">ClickMe</button>
         <input id="hiddenInput" style="visibility: hidden;">
 
       </div>
@@ -52,12 +52,11 @@
       </div>
       <div class="col-3"></div>
     </div>
-
   </div>
 
   <script>
 
-    // Gets Link for Theme Song
+    // Phone Users Keyboard Pop up 
 
     document.getElementById("openKeyboard").addEventListener("click", function () {
       let inputElement = document.getElementById("hiddenInput");
@@ -86,7 +85,7 @@
     var gameObject = {
       userPressed: "",
       canUse: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
-      words: ["alta"],
+      words: ["madonna", "seventies", "random", "jackson", "problem"],
       wordsUsed: [],
       answer: [],
       wordArray: [],
@@ -99,7 +98,7 @@
       checkWin: function (string1, string2) {
         if (string1 === string2) {
           audioWin.play();
-          message.innerHTML = "Te Amo";
+          message.innerHTML = "You won!";
           this.wins++
           gamesWon.innerHTML = this.wins;
           this.reset();
