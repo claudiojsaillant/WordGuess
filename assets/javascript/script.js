@@ -148,14 +148,6 @@ document.onkeyup = function (event) {
   gameObject.checkWin(gameObject.wArrayString, gameObject.aArrayString);
 }
 
-document.getElementById("openKeyboard").ready(function () {
-  get('#field').click(function (e) {
-    $(this).focus();
-  });
-  document.getElementById("openKeyboard").click(function (e) {
-    document.getElementById("hiddenInput").trigger('click');
-  });
-});
 
 
 
